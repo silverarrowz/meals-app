@@ -1,8 +1,19 @@
 import { useGlobalContext } from "../context";
-import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 
 const Meals = () => {
-  const { meals, loading, selectMeal, addToFavorites } = useGlobalContext();
+  const {
+    loading,
+    meals,
+    selectMeal,
+    addToFavorites,
+    removeFromFavorites,
+    favorites,
+  } = useGlobalContext();
+
+  const toggleFavorite = (isFavorite, idMeal) => {
+    isFavorite ? removeFromFavorites(idMeal) : addToFavorites(idMeal);
+  };
 
   if (loading)
     return (
@@ -22,6 +33,7 @@ const Meals = () => {
     <section className="section-center">
       {meals.map((meal) => {
         const { idMeal, strMeal: mealTitle, strMealThumb: mealPhoto } = meal;
+        const isFavorite = favorites.find((meal) => meal.idMeal === idMeal);
         return (
           <article className="meal" key={idMeal}>
             <img
@@ -34,9 +46,9 @@ const Meals = () => {
               <h5 className="meal__title">{mealTitle}</h5>
               <button
                 className="meal__like-btn"
-                onClick={() => addToFavorites(idMeal)}
+                onClick={() => toggleFavorite(isFavorite, idMeal)}
               >
-                <MdFavoriteBorder />
+                {isFavorite ? <MdFavorite /> : <MdFavoriteBorder />}
               </button>
             </footer>
           </article>
