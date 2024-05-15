@@ -17,19 +17,7 @@ const AppProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("favoriteMeals")) || []
   );
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
-  const closeOnEsc = () => {
-    const handleKeyDown = (event) => {
-      if (event.keyCode === 27) {
-        setShowModal(false);
-        document.removeEventListener("keydown", handleKeyDown);
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-  };
+  // Fetching data
 
   const fetchMeals = async (url) => {
     setLoading(true);
@@ -51,39 +39,6 @@ const AppProvider = ({ children }) => {
     fetchMeals(randomMealUrl);
   };
 
-  const selectMeal = (idMeal, favoriteMeal) => {
-    let meal;
-    if (favoriteMeal) {
-      meal = favorites.find((meal) => meal.idMeal === idMeal);
-    } else {
-      meal = meals.find((meal) => meal.idMeal === idMeal);
-    }
-
-    setSelectedMeal(meal);
-    setShowModal(true);
-    closeOnEsc();
-  };
-
-  const addToFavorites = (idMeal) => {
-    const isFavorite = favorites.find(
-      (favoriteMeal) => favoriteMeal.idMeal === idMeal
-    );
-    if (isFavorite) return;
-
-    const meal = meals.find((meal) => meal.idMeal === idMeal);
-    const updatedFavorites = [...favorites, meal];
-    setFavorites(updatedFavorites);
-
-    localStorage.setItem("favoriteMeals", JSON.stringify(updatedFavorites));
-  };
-
-  const removeFromFavorites = (idMeal) => {
-    const updatedFavorites = favorites.filter((meal) => meal.idMeal !== idMeal);
-    setFavorites(updatedFavorites);
-
-    localStorage.setItem("favoriteMeals", JSON.stringify(updatedFavorites));
-  };
-
   useEffect(() => {
     fetchMeals(allMealUrl);
   }, []);
@@ -91,6 +46,54 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     if (searchTerm) fetchMeals(`${allMealUrl}${searchTerm}`);
   }, [searchTerm]);
+
+  // Opening/closing modal
+
+  const closeModal = () => {
+    setShowModal(false);
+    document.removeEventListener("keydown", handleKeyDown);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      closeModal();
+    }
+  };
+
+  const selectMeal = (idMeal, isFavorite) => {
+    const selectedMeal = (isFavorite ? favorites : meals).find(
+      (meal) => meal.idMeal === idMeal
+    );
+    setSelectedMeal(selectedMeal);
+    setShowModal(true);
+    document.addEventListener("keydown", handleKeyDown);
+  };
+
+  // Adding/removing favorites
+
+  const updateLocalStorageFavorites = (updatedFavorites) => {
+    localStorage.setItem("favoriteMeals", JSON.stringify(updatedFavorites));
+  };
+
+  const addToFavorites = (idMeal) => {
+    const isAlreadyFavorite = favorites.some(
+      (favoriteMeal) => favoriteMeal.idMeal === idMeal
+    );
+    if (isAlreadyFavorite) return;
+
+    const mealToAdd = meals.find((meal) => meal.idMeal === idMeal);
+    const updatedFavorites = [...favorites, mealToAdd];
+    setFavorites(updatedFavorites);
+
+    updateLocalStorageFavorites(updatedFavorites);
+  };
+
+  const removeFromFavorites = (idMeal) => {
+    const updatedFavorites = favorites.filter((meal) => meal.idMeal !== idMeal);
+    setFavorites(updatedFavorites);
+
+    updateLocalStorageFavorites(updatedFavorites);
+  };
 
   return (
     <AppContext.Provider
