@@ -107,10 +107,12 @@ html {
   letter-spacing: 1px;
 
   text-decoration: none;
+  color: var(--black);
 }
 
 .search__nav-link:hover {
   font-style: italic;
+  color: #75e5b2;
 }
 
 .search__nav-link:first-child {
@@ -150,9 +152,18 @@ html {
   color: var(--grey-700);
 }
 
+.search__btn:hover {
+  background-color: #dbfe8c;
+}
+
 .search__btn_random {
   border-radius: 0 5px 5px 0;
   background-color: var(--green-light);
+  transition: 0.2s ease;
+}
+
+.search__btn_random:hover {
+  background-color: #75e5b2;
 }
 
 /*Meals*/
@@ -304,7 +315,7 @@ html {
 
 .favorites {
   padding: 1rem 0;
-  background-color: var(--green-light);
+  background-color: #75e5b2;
 }
 
 .favorites__content {
