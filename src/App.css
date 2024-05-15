@@ -77,6 +77,23 @@ html {
   background-color: var(--grey-900);
 }
 
+.search__nav {
+  display: flex;
+  align-items: center;
+
+  width: var(--view-width);
+  max-width: var(--max-width);
+}
+
+.search__home-btn {
+  border: none;
+  padding: 0.625rem;
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
 .search__form {
   display: flex;
   flex-wrap: wrap;

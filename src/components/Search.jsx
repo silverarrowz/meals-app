@@ -26,25 +26,30 @@ const Search = () => {
 
   return (
     <header className="search__container">
-      <form className="search__form" onSubmit={handleSubmit}>
-        <input
-          value={text}
-          onChange={handleChange}
-          type="text"
-          placeholder="Search for recipes..."
-          className="search__input"
-        />
-        <button type="submit" className="btn search__btn">
-          Search
+      <div className="search__nav">
+        <button className="search__home-btn" onClick={() => setSearchTerm(" ")}>
+          Home
         </button>
-        <button
-          type="button"
-          className="btn search__btn search__btn_random"
-          onClick={handleRandomMeal}
-        >
-          Surprise me!
-        </button>
-      </form>
+        <form className="search__form" onSubmit={handleSubmit}>
+          <input
+            value={text}
+            onChange={handleChange}
+            type="text"
+            placeholder="Search for recipes..."
+            className="search__input"
+          />
+          <button type="submit" className="btn search__btn">
+            Search
+          </button>
+          <button
+            type="button"
+            className="btn search__btn search__btn_random"
+            onClick={handleRandomMeal}
+          >
+            Surprise me!
+          </button>
+        </form>
+      </div>
     </header>
   );
 };
