@@ -32,6 +32,11 @@ const Search = () => {
   return (
     <header className="search">
       <div className="search__container">
+        <img
+          className="search__logo"
+          onClick={() => navigate("/meals-app/")}
+          src="./public/fish.png"
+        />
         <nav className="search__nav">
           <NavLink
             to="/meals-app/"

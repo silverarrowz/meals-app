@@ -82,12 +82,17 @@ html {
 /*Search*/
 
 .search {
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 5rem;
 
-  /* background-color: var(--grey-900); */
+  background-color: var(--grey-200);
 }
 
 .search__container {
@@ -96,6 +101,15 @@ html {
 
   width: var(--view-width);
   max-width: var(--max-width);
+}
+
+.search__logo {
+  width: 40px;
+  border-radius: 50%;
+  display: block;
+  object-fit: cover;
+  margin-right: 1.875rem;
+  cursor: pointer;
 }
 
 .search__nav {
@@ -308,14 +322,16 @@ html {
 }
 
 .modal__close-btn:hover {
-  background-color: rgb(75, 119, 75);
+  background-color: cadetblue;
 }
 
 /*Favorites*/
 
 .favorites {
   padding: 1rem 0;
-  background-color: #75e5b2;
+  margin-top: 80px;
+  background-color: cadetblue;
+  color: var(--white);
 }
 
 .favorites__content {
@@ -354,6 +370,7 @@ html {
 .favorites__remove-btn {
   margin-top: 0.25rem;
   background: transparent;
+  color: var(--white);
   border: transparent;
   cursor: pointer;
   font-size: 0.7rem;
