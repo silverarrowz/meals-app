@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useGlobalContext } from "../context";
 
+import { NavLink, useNavigate } from "react-router-dom";
+
 const Search = () => {
   const [text, setText] = useState("");
-
-  const { setSearchTerm, fetchRandomMeal } = useGlobalContext();
+  const { setSearchTerm, fetchRandomMeal, fetchMeals, allMealUrl } =
+    useGlobalContext();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -15,6 +18,7 @@ const Search = () => {
     if (text) {
       setSearchTerm(text);
       setText("");
+      navigate("/meals-app/");
     }
   };
 
@@ -22,14 +26,25 @@ const Search = () => {
     setSearchTerm("");
     setText("");
     fetchRandomMeal();
+    navigate("/meals-app/");
   };
 
   return (
-    <header className="search__container">
-      <div className="search__nav">
-        <button className="search__home-btn" onClick={() => setSearchTerm(" ")}>
-          Home
-        </button>
+    <header className="search">
+      <div className="search__container">
+        <nav className="search__nav">
+          <NavLink
+            to="/meals-app/"
+            className="search__nav-link"
+            onClick={() => fetchMeals(allMealUrl)}
+          >
+            Home
+          </NavLink>
+          <NavLink to="favorites" className="search__nav-link">
+            Favorites
+          </NavLink>
+        </nav>
+
         <form className="search__form" onSubmit={handleSubmit}>
           <input
             value={text}

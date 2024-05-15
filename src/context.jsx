@@ -102,6 +102,8 @@ const AppProvider = ({ children }) => {
         loading,
         setSearchTerm,
         fetchRandomMeal,
+        fetchMeals,
+        allMealUrl,
         showModal,
         closeModal,
         selectedMeal,

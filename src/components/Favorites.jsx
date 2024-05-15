@@ -1,6 +1,6 @@
 import { useGlobalContext } from "../context";
 
-const Favories = () => {
+const Favorites = () => {
   const { favorites, selectMeal, removeFromFavorites } = useGlobalContext();
 
   return (
@@ -36,4 +36,4 @@ const Favories = () => {
   );
 };
 
-export default Favories;
+export default Favorites;
