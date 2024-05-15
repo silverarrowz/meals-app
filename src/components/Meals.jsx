@@ -1,5 +1,6 @@
 import { useGlobalContext } from "../context";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
+import Meal from "./Meal";
 
 const Meals = () => {
   const {
@@ -34,25 +35,7 @@ const Meals = () => {
       {meals.map((meal) => {
         const { idMeal, strMeal: mealTitle, strMealThumb: mealPhoto } = meal;
         const isFavorite = favorites.find((meal) => meal.idMeal === idMeal);
-        return (
-          <article className="meal" key={idMeal}>
-            <img
-              className="meal__image"
-              src={mealPhoto}
-              alt="meal-photo"
-              onClick={() => selectMeal(idMeal)}
-            />
-            <footer className="meal__info">
-              <h5 className="meal__title">{mealTitle}</h5>
-              <button
-                className="meal__like-btn"
-                onClick={() => toggleFavorite(isFavorite, idMeal)}
-              >
-                {isFavorite ? <MdFavorite /> : <MdFavoriteBorder />}
-              </button>
-            </footer>
-          </article>
-        );
+        return <Meal key={idMeal} meal={meal} />;
       })}
     </section>
   );
