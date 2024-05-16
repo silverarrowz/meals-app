@@ -49,14 +49,20 @@ const AppProvider = ({ children }) => {
 
   // Opening/closing modal
 
-  const closeModal = () => {
-    setShowModal(false);
-    document.removeEventListener("keydown", handleKeyDown);
+  const closeModal = (e) => {
+    if (
+      e.target.classList.contains("modal__overlay") ||
+      e.target.classList.contains("modal__close-btn")
+    ) {
+      setShowModal(false);
+      document.removeEventListener("keydown", handleKeyDown);
+    }
   };
 
   const handleKeyDown = (event) => {
     if (event.key === "Escape") {
-      closeModal();
+      setShowModal(false);
+      document.removeEventListener("keydown", handleKeyDown);
     }
   };
 

@@ -20,7 +20,7 @@ const Meal = ({ meal }) => {
         className="meal__image"
         src={mealPhoto}
         alt="meal-photo"
-        onClick={() => selectMeal(idMeal)}
+        onClick={() => selectMeal(idMeal, isFavorite)}
       />
       <footer className="meal__info">
         <h5 className="meal__title">{mealTitle}</h5>
