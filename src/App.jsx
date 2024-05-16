@@ -5,6 +5,7 @@ import Search from "./components/Search";
 import Modal from "./components/Modal";
 import Favorites from "./components/Favorites";
 import { Outlet } from "react-router-dom";
+import Footer from "./components/Footer";
 
 function App() {
   const { showModal, favorites } = useGlobalContext();
@@ -12,9 +13,9 @@ function App() {
     <>
       <Search />
       {favorites.length > 0 && <Favorites />}
-      {/* <Meals /> */}
       <Outlet />
       {showModal && <Modal />}
+      <Footer />
     </>
   );
 }
